@@ -5,7 +5,7 @@ Projet pour le cours 420-930-MA (Lab 2, sujet 3)
 Appli JavaFX qui gère une bibliothèque de chansons + des playlists perso.
 
 ## Équipe
-- (à compléter)
+- Hugo Josue Alcin
 
 ## Ça contient quoi
 - model -> Chanson, Genre, Playlist, Bibliotheque
