@@ -1,0 +1,7 @@
+target/
+.idea/
+out/
+*.class
+*.iml
+.DS_Store
+database.properties

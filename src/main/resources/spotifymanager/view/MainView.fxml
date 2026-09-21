@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="spotifymanager.controller.MainController"
+            fx:id="racine" styleClass="root-pane">
+
+    <!-- ============================================================ -->
+    <!-- HAUT : recherche + filtres combinables + tri                 -->
+    <!-- ============================================================ -->
+    <top>
+        <VBox spacing="8" styleClass="barre-haut">
+            <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
+
+            <TextField fx:id="champRecherche" promptText="Rechercher un titre, un artiste, un album..."/>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Genre :"/>
+                <ComboBox fx:id="comboGenre"/>
+                <Label text="Décennie :"/>
+                <ComboBox fx:id="comboDecennie"/>
+                <Label text="Artiste :"/>
+                <ComboBox fx:id="comboArtiste"/>
+                <Label text="Playlist :"/>
+                <ComboBox fx:id="comboFiltrePlaylist" promptText="Toutes"/>
+                <Button fx:id="boutonReinitialiserFiltres" text="Réinitialiser les filtres"/>
+            </HBox>
+
+            <HBox spacing="20" alignment="CENTER_LEFT">
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label fx:id="labelDureeMax" text="Durée max :"/>
+                    <Slider fx:id="sliderDureeMax" prefWidth="180"/>
+                </HBox>
+                <HBox spacing="8" alignment="CENTER_LEFT">
+                    <Label fx:id="labelEcoutesMin" text="Écoutes min :"/>
+                    <Slider fx:id="sliderEcoutesMin" prefWidth="180"/>
+                </HBox>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Trier par :"/>
+                <ComboBox fx:id="comboCritereTri"/>
+                <Label text="Algorithme :"/>
+                <ComboBox fx:id="comboAlgorithme"/>
+                <Button fx:id="boutonTrier" text="Trier" styleClass="bouton-principal"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label text="Thème :"/>
+                <ComboBox fx:id="comboTheme"/>
+                <Button fx:id="boutonStatistiques" text="📊 Statistiques"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <!-- ============================================================ -->
+    <!-- CENTRE : table des chansons + pagination                     -->
+    <!-- ============================================================ -->
+    <center>
+        <VBox spacing="8">
+            <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
+
+            <TableView fx:id="tableChansons" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colTitre" text="Titre" prefWidth="200"/>
+                    <TableColumn fx:id="colArtiste" text="Artiste" prefWidth="160"/>
+                    <TableColumn fx:id="colAlbum" text="Album" prefWidth="160"/>
+                    <TableColumn fx:id="colAnnee" text="Année" prefWidth="70"/>
+                    <TableColumn fx:id="colGenre" text="Genre" prefWidth="100"/>
+                    <TableColumn fx:id="colDuree" text="Durée" prefWidth="70"/>
+                    <TableColumn fx:id="colEcoutes" text="Écoutes" prefWidth="90"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="6">
+                <Button fx:id="boutonAjouterChanson" text="+ Ajouter une chanson"/>
+                <Button fx:id="boutonModifierChanson" text="Modifier la sélection"/>
+                <Button fx:id="boutonSupprimerChanson" text="Supprimer du catalogue"/>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER">
+                <Button fx:id="boutonPagePrecedente" text="◀ Précédent"/>
+                <Label fx:id="labelPage" text="Page 1 / 1"/>
+                <Button fx:id="boutonPageSuivante" text="Suivant ▶"/>
+            </HBox>
+        </VBox>
+    </center>
+
+    <!-- ============================================================ -->
+    <!-- DROITE : gestion des playlists                                -->
+    <!-- ============================================================ -->
+    <right>
+        <VBox spacing="8" prefWidth="280" styleClass="panneau-playlists">
+            <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
+
+            <Label text="Playlists" styleClass="titre-section"/>
+            <ListView fx:id="listePlaylists" prefHeight="140"/>
+
+            <HBox spacing="6">
+                <TextField fx:id="champNomPlaylist" promptText="Nom de la playlist" HBox.hgrow="ALWAYS"/>
+                <Button fx:id="boutonCreerPlaylist" text="Créer"/>
+            </HBox>
+            <HBox spacing="6">
+                <Button fx:id="boutonSupprimerPlaylist" text="Supprimer" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="boutonMixQuotidien" text="🎲 Mix quotidien" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+            <HBox spacing="6">
+                <Button fx:id="boutonExporterJson" text="Exporter JSON" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="boutonImporterJson" text="Importer JSON" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+
+            <Separator/>
+
+            <Label text="Contenu de la playlist" styleClass="titre-section"/>
+            <ListView fx:id="listeContenuPlaylist" VBox.vgrow="ALWAYS"/>
+            <Label fx:id="labelDureeTotalePlaylist" wrapText="true"/>
+
+            <HBox spacing="6">
+                <Button fx:id="boutonMonter" text="▲ Monter" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+                <Button fx:id="boutonDescendre" text="▼ Descendre" HBox.hgrow="ALWAYS" maxWidth="Infinity"/>
+            </HBox>
+            <Button fx:id="boutonAjouterAPlaylist" text="Ajouter la chanson sélectionnée (table)" maxWidth="Infinity" wrapText="true"/>
+            <Button fx:id="boutonRetirerDePlaylist" text="Retirer de la playlist" maxWidth="Infinity"/>
+        </VBox>
+    </right>
+
+    <!-- ============================================================ -->
+    <!-- BAS : lecteur simulé                                          -->
+    <!-- ============================================================ -->
+    <bottom>
+        <HBox spacing="15" alignment="CENTER_LEFT" styleClass="panneau-lecteur">
+            <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
+
+            <Label fx:id="labelChansonEnCours" text="Aucune chanson" styleClass="titre-section"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="boutonPrecedent" text="⏮"/>
+            <Button fx:id="boutonPlayPause" text="▶ Play"/>
+            <Button fx:id="boutonSuivant" text="⏭"/>
+            <ToggleButton fx:id="boutonShuffle" text="🔀 Shuffle"/>
+            <Slider fx:id="sliderProgression" prefWidth="200" disable="true"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

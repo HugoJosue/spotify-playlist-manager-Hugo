@@ -1,0 +1,71 @@
+.root-pane {
+    -fx-background-color: #121212;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+.barre-haut {
+    -fx-background-color: #181818;
+    -fx-border-color: transparent transparent #282828 transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.panneau-playlists {
+    -fx-background-color: #181818;
+    -fx-border-color: #282828 transparent transparent transparent;
+    -fx-border-width: 0 0 0 1;
+}
+
+.panneau-lecteur {
+    -fx-background-color: #181818;
+    -fx-border-color: #282828 transparent transparent transparent;
+    -fx-border-width: 1 0 0 0;
+}
+
+.titre-section {
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.label {
+    -fx-text-fill: #b3b3b3;
+}
+
+.bouton-principal {
+    -fx-background-color: #1db954;
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20;
+}
+
+.bouton-principal:hover {
+    -fx-background-color: #1ed760;
+}
+
+.button {
+    -fx-background-color: #282828;
+    -fx-text-fill: #ffffff;
+    -fx-background-radius: 4;
+}
+
+.button:hover {
+    -fx-background-color: #3e3e3e;
+}
+
+.text-field, .combo-box, .list-view, .table-view {
+    -fx-background-color: #282828;
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #181818;
+}
+
+.table-row-cell {
+    -fx-background-color: #121212;
+    -fx-text-fill: #ffffff;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #1db954;
+}
