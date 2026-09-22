@@ -55,5 +55,5 @@ chansons + générées). Le sujet demandait 300-500 chansons, 8 genres, 30 artis
 1. Installer PostgreSQL, créer une base (ex: `createdb spotify_db`)
 2. `psql -d spotify_db -f schema.sql`
 3. `python3 generate_donnees_sql.py` puis `psql -d spotify_db -f donnees.sql`
-4. Copier database.properties.example vers database.properties, mettre les bons identifiants
+4. Mettre les bons identifiants vers database.properties.
 5. Lancer l'appli normalement (mvn javafx:run)
