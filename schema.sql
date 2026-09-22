@@ -42,9 +42,5 @@ CREATE TABLE playlist_chanson (
     PRIMARY KEY (id_playlist, id_chanson)
 );
 
--- Notes pour l'oral :
--- - artiste -> chanson en ON DELETE RESTRICT : on empêche de supprimer un
---   artiste tant qu'il a des chansons, pour éviter d'en perdre par erreur.
--- - playlist_chanson en ON DELETE CASCADE des deux côtés : une ligne de
---   liaison n'a aucun sens sans sa playlist ou sa chanson, donc elle doit
---   disparaître avec l'un ou l'autre.
+-- artiste -> chanson : ON DELETE RESTRICT (empêche de supprimer un artiste qui a encore des chansons)
+-- playlist_chanson : ON DELETE CASCADE des deux côtés (une ligne de liaison n'a pas de sens sans sa playlist ou sa chanson)

@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-// Implémentation PostgreSQL de SourceDonnees, derrière la même interface
-// que LecteurCSV. Le schéma normalise l'artiste dans sa propre table
-// (voir schema.sql), donc chaque méthode fait un JOIN ou résout l'id
-// de l'artiste au besoin.
+// Implémentation PostgreSQL de SourceDonnees, derrière la même interface que LecteurCSV.
+// Le schéma normalise l'artiste dans sa propre table (voir schema.sql), donc chaque méthode fait un JOIN ou résout l'id de l'artiste au besoin.
 public class ChansonDaoPostgres implements SourceDonnees {
 
     private final ConnexionBD connexion;

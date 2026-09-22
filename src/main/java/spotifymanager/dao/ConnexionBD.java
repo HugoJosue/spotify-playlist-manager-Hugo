@@ -8,8 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-// Seule classe du projet à connaître l'URL JDBC. Les identifiants viennent
-// de database.properties (jamais écrits en dur, jamais poussés sur GitHub).
+// Seule classe du projet à connaître l'URL JDBC. Les identifiants viennent de database.properties .
 public class ConnexionBD {
 
     private final String url;

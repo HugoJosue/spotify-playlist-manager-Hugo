@@ -9,9 +9,9 @@
             fx:controller="spotifymanager.controller.MainController"
             fx:id="racine" styleClass="root-pane">
 
-    <!-- ============================================================ -->
-    <!-- HAUT : recherche + filtres combinables + tri                 -->
-    <!-- ============================================================ -->
+
+    <!-- HAUT : recherche + filtres combinables + tri -->
+
     <top>
         <VBox spacing="8" styleClass="barre-haut">
             <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
@@ -55,9 +55,9 @@
         </VBox>
     </top>
 
-    <!-- ============================================================ -->
-    <!-- CENTRE : table des chansons + pagination                     -->
-    <!-- ============================================================ -->
+
+    <!-- CENTRE : table des chansons + pagination -->
+
     <center>
         <VBox spacing="8">
             <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
@@ -88,9 +88,9 @@
         </VBox>
     </center>
 
-    <!-- ============================================================ -->
-    <!-- DROITE : gestion des playlists                                -->
-    <!-- ============================================================ -->
+
+    <!-- DROITE : gestion des playlists -->
+
     <right>
         <VBox spacing="8" prefWidth="280" styleClass="panneau-playlists">
             <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
@@ -126,9 +126,9 @@
         </VBox>
     </right>
 
-    <!-- ============================================================ -->
-    <!-- BAS : lecteur simulé                                          -->
-    <!-- ============================================================ -->
+
+    <!-- BAS : lecteur simulé -->
+
     <bottom>
         <HBox spacing="15" alignment="CENTER_LEFT" styleClass="panneau-lecteur">
             <padding><Insets top="10" right="15" bottom="10" left="15"/></padding>
