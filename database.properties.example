@@ -1,3 +1,0 @@
-db.url=jdbc:postgresql://localhost:5432/spotify_db
-db.user=postgres
-db.password=change_me

@@ -105,10 +105,8 @@ public class MainController {
 
     @FXML
     public void initialize() {
-        // Une seule ligne à changer pour passer de l'un à l'autre.
-        // SourceDonnees CSV (Lab 2) :
-        // source = new LecteurCSV(Path.of("data/chansons.csv"));
-        // SourceDonnees PostgreSQL (Lab 3) :
+        // pour changer de source de données, remplacer cette ligne
+        // (LecteurCSV pour le csv, sinon ChansonDaoPostgres)
         source = new ChansonDaoPostgres(new ConnexionBD(Path.of("database.properties")));
 
         Bibliotheque bibliotheque = new Bibliotheque();
@@ -123,8 +121,53 @@ public class MainController {
         configurerLecteur();
         configurerStatistiques();
         configurerCrudChansons();
+        configurerMenuContextuel();
 
         rafraichir();
+    }
+
+    // clic droit sur une chanson -> ajouter directement à une playlist, sans double sélection
+    private void configurerMenuContextuel() {
+        tableChansons.setRowFactory(tv -> {
+            TableRow<Chanson> row = new TableRow<>();
+            ContextMenu menu = new ContextMenu();
+            Menu sousMenuAjouter = new Menu("Ajouter à une playlist");
+            menu.getItems().add(sousMenuAjouter);
+
+            menu.setOnShowing(e -> {
+                sousMenuAjouter.getItems().clear();
+                List<Playlist> playlists = service.getBibliotheque().getPlaylists();
+                if (playlists.isEmpty()) {
+                    MenuItem aucune = new MenuItem("(crée d'abord une playlist)");
+                    aucune.setDisable(true);
+                    sousMenuAjouter.getItems().add(aucune);
+                } else {
+                    for (Playlist p : playlists) {
+                        MenuItem item = new MenuItem(p.getNom());
+                        item.setOnAction(ev -> {
+                            Chanson chanson = row.getItem();
+                            if (chanson == null) return;
+                            boolean ajoutee = service.ajouterChansonAPlaylist(p, chanson);
+                            if (!ajoutee) {
+                                afficherAlerte(Alert.AlertType.INFORMATION, "Playlist",
+                                        "\"" + chanson.getTitre() + "\" est déjà dans \"" + p.getNom() + "\".");
+                            }
+                            if (p.equals(listePlaylists.getSelectionModel().getSelectedItem())) {
+                                afficherContenuPlaylist(p);
+                            }
+                        });
+                        sousMenuAjouter.getItems().add(item);
+                    }
+                }
+            });
+
+            row.contextMenuProperty().bind(
+                    javafx.beans.binding.Bindings.when(row.emptyProperty())
+                            .then((ContextMenu) null)
+                            .otherwise(menu)
+            );
+            return row;
+        });
     }
 
     private void configurerColonnes() {
@@ -231,7 +274,6 @@ public class MainController {
         listeContenuPlaylist.setItems(FXCollections.observableArrayList());
 
         listePlaylists.getSelectionModel().selectedItemProperty().addListener((o, a, n) -> {
-            comboFiltrePlaylist.getSelectionModel().select(n);
             afficherContenuPlaylist(n);
         });
 
@@ -395,8 +437,7 @@ public class MainController {
         });
     }
 
-    // CRUD chanson (section 4.6 du Lab 3) : ajouter/modifier/supprimer, validé,
-    // avec gestion des erreurs SQL sans jamais planter l'appli.
+    // ajouter/modifier/supprimer une chanson, avec validation
     private void configurerCrudChansons() {
         boutonAjouterChanson.setOnAction(e -> {
             Optional<Chanson> resultat = ouvrirFormulaireChanson(null);

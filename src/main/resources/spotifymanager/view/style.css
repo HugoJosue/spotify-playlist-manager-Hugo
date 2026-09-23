@@ -69,3 +69,16 @@
 .table-row-cell:selected {
     -fx-background-color: #1db954;
 }
+
+.list-cell {
+    -fx-background-color: #282828;
+    -fx-text-fill: #ffffff;
+}
+
+.list-cell:selected {
+    -fx-background-color: #1db954;
+}
+
+.list-cell:empty {
+    -fx-background-color: #282828;
+}
